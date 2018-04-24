@@ -1,0 +1,1229 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment}\label{assignment}
+
+    \subsection{Question 1:}\label{question-1}
+
+Write a program that calculates and prints the value according to the
+given formula:
+
+Q = Square root of {[}(2 * C * D)/H{]}
+
+Following are the fixed values of C and H:
+
+C is 50. H is 30.
+
+D is the variable whose values should be input to your program in a
+comma-separated sequence.
+
+\paragraph{Example}\label{example}
+
+Let us assume the following comma separated input sequence is given to
+the program:
+
+100,150,180
+
+The output of the program should be:
+
+18,22,24
+
+\paragraph{Hints:}\label{hints}
+
+If the output received is in decimal form, it should be rounded off to
+its nearest value (for example, if the output received is 26.0, it
+should be printed as 26).
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{math}                                              \PY{c+c1}{\PYZsh{}import necessary libraries }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}define function to implement formula}
+        \PY{k}{def} \PY{n+nf}{squareRoot}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{C} \PY{o}{*} \PY{n}{D}\PY{p}{)} \PY{o}{/} \PY{n}{H}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{\texorpdfstring{Formula :
+\[ Q = {\sqrt {2 * C * D\over H}} \]}{Formula :  Q = \{\textbackslash{}sqrt \{2 * C * D\textbackslash{}over H\}\} }}\label{formula-q-sqrt-2-c-dover-h}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}initialize pre defined values}
+         \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{50}
+         \PY{n}{H} \PY{o}{=} \PY{l+m+mi}{30}
+         
+         \PY{n}{D} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter number : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                       \PY{c+c1}{\PYZsh{} input the variable D}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The answer is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{squareRoot}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{p}{)}        \PY{c+c1}{\PYZsh{} print answer by calling the defined function}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter number : 100
+The answer is 18 
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{math}                                              \PY{c+c1}{\PYZsh{}import necessary libraries }
+\end{Verbatim}
+
+
+    \paragraph{\texorpdfstring{Formula :
+\[ Q = {\sqrt {2 * C * D\over H}} \]}{Formula :  Q = \{\textbackslash{}sqrt \{2 * C * D\textbackslash{}over H\}\} }}\label{formula-q-sqrt-2-c-dover-h}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}initialize pre\PYZhy{}defined values}
+         \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{50}
+         \PY{n}{H} \PY{o}{=} \PY{l+m+mi}{30}
+         
+         \PY{n}{D} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter number : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                        \PY{c+c1}{\PYZsh{} input the variable D}
+         \PY{n}{answer} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{C} \PY{o}{*} \PY{n}{D}\PY{p}{)} \PY{o}{/} \PY{n}{H}\PY{p}{)}\PY{p}{)}          \PY{c+c1}{\PYZsh{} calculate answer by passing through provided formula}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the answer is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{answer}\PY{p}{)}\PY{p}{)}                \PY{c+c1}{\PYZsh{} print answer }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter number : 150
+the answer is 22 
+
+    \end{Verbatim}
+
+    \subsection{Question 2}\label{question-2}
+
+    Write a program which takes 2 digits, X,Y as input and generates a
+2-dimensional array. The element value in the i-th row and j-th column
+of the array should be i*j.
+
+Note: i=0,1.., X-1; j=0,1,¡ Y-1.
+
+\paragraph{Example}\label{example}
+
+Suppose the following inputs are given to the program:
+
+3,5
+
+Then, the output of the program should be:
+
+{[}{[}0, 0, 0, 0, 0{]}, {[}0, 1, 2, 3, 4{]}, {[}0, 2, 4, 6, 8{]}{]}
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}define function to display matrix by accepting variables}
+        \PY{k}{def} \PY{n+nf}{displayMatrix}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dim\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{]}        \PY{c+c1}{\PYZsh{} define array}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}                                           \PY{c+c1}{\PYZsh{} use recurvise loop to reach entered numbers  }
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dim\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{i} \PY{o}{*} \PY{n}{j}                              \PY{c+c1}{\PYZsh{} allocate array by multiplying the row and columns}
+            \PY{k}{return}\PY{p}{(}\PY{n}{dim\PYZus{}array}\PY{p}{)}                                            \PY{c+c1}{\PYZsh{} return array}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{x} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input the number of rows : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                    \PY{c+c1}{\PYZsh{} input the number of rows}
+        \PY{n}{y} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input the number of columns : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                 \PY{c+c1}{\PYZsh{} input number of columns}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the 2\PYZhy{}Dimensional array is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.} \PY{n+nb}{format}\PY{p}{(}\PY{n}{displayMatrix}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{)}    \PY{c+c1}{\PYZsh{} display the array}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Input the number of rows : 3
+Input the number of columns : 5
+the 2-Dimensional array is : [[0, 0, 0, 0, 0], [0, 1, 2, 3, 4], [0, 2, 4, 6, 8]]
+
+    \end{Verbatim}
+
+    \subsubsection{Verision 2}\label{verision-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{row\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input number of rows: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                           \PY{c+c1}{\PYZsh{} input rows}
+        \PY{n}{col\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input number of columns: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                        \PY{c+c1}{\PYZsh{} input columns}
+        \PY{n}{multi\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{]}   \PY{c+c1}{\PYZsh{} allocate array}
+        
+        \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{:}                                               \PY{c+c1}{\PYZsh{} recursive loop to reach entered numbers  }
+            \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{:}                                     
+                \PY{n}{multi\PYZus{}list}\PY{p}{[}\PY{n}{row}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{=} \PY{n}{row}\PY{o}{*}\PY{n}{col}                                    \PY{c+c1}{\PYZsh{} allocate array by multiplying the row and columns}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the 2\PYZhy{}Dimensional array is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{multi\PYZus{}list}\PY{p}{)}\PY{p}{)}              \PY{c+c1}{\PYZsh{} display the array }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Input number of rows: 3
+Input number of columns: 5
+the 2-Dimensional array is : [[0, 0, 0, 0, 0], [0, 1, 2, 3, 4], [0, 2, 4, 6, 8]]
+
+    \end{Verbatim}
+
+    \subsection{Question 3}\label{question-3}
+
+    \subsubsection{Note: problem similar to Question
+2}\label{note-problem-similar-to-question-2}
+
+    Write a program which takes 2 digits, X,Y as input and generates a
+2-dimensional array. The element value in the i-th row and j-th column
+of the array should be i*j.
+
+Note: i=0,1.., X-1; j=0,1,¡ Y-1.
+
+\paragraph{Example}\label{example}
+
+Suppose the following inputs are given to the program:
+
+3,5
+
+Then, the output of the program should be:
+
+{[}{[}0, 0, 0, 0, 0{]}, {[}0, 1, 2, 3, 4{]}, {[}0, 2, 4, 6, 8{]}{]}
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}define function to display matrix by accepting variables}
+        \PY{k}{def} \PY{n+nf}{displayMatrix}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dim\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{]}        \PY{c+c1}{\PYZsh{} define array}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}                                           \PY{c+c1}{\PYZsh{} use recurvise loop to reach entered numbers  }
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dim\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{i} \PY{o}{*} \PY{n}{j}                              \PY{c+c1}{\PYZsh{} allocate array by multiplying the row and columns}
+            \PY{k}{return}\PY{p}{(}\PY{n}{dim\PYZus{}array}\PY{p}{)}                                            \PY{c+c1}{\PYZsh{} return array}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{x} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input the number of rows : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                    \PY{c+c1}{\PYZsh{} input the number of rows}
+        \PY{n}{y} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input the number of columns : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                 \PY{c+c1}{\PYZsh{} input number of columns}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the 2\PYZhy{}Dimensional array is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.} \PY{n+nb}{format}\PY{p}{(}\PY{n}{displayMatrix}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{)}    \PY{c+c1}{\PYZsh{} display the array}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Input the number of rows : 3
+Input the number of columns : 5
+the 2-Dimensional array is : [[0, 0, 0, 0, 0], [0, 1, 2, 3, 4], [0, 2, 4, 6, 8]]
+
+    \end{Verbatim}
+
+    \subsubsection{Verision 2}\label{verision-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{row\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input number of rows: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                           \PY{c+c1}{\PYZsh{} input rows}
+        \PY{n}{col\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input number of columns: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                        \PY{c+c1}{\PYZsh{} input columns}
+        \PY{n}{multi\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{]}   \PY{c+c1}{\PYZsh{} allocate array}
+        
+        \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{:}                                               \PY{c+c1}{\PYZsh{} recursive loop to reach entered numbers  }
+            \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{:}                                     
+                \PY{n}{multi\PYZus{}list}\PY{p}{[}\PY{n}{row}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{=} \PY{n}{row}\PY{o}{*}\PY{n}{col}                                    \PY{c+c1}{\PYZsh{} allocate array by multiplying the row and columns}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the 2\PYZhy{}Dimensional array is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{multi\PYZus{}list}\PY{p}{)}\PY{p}{)}              \PY{c+c1}{\PYZsh{} display the array }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Input number of rows: 3
+Input number of columns: 5
+the 2-Dimensional array is : [[0, 0, 0, 0, 0], [0, 1, 2, 3, 4], [0, 2, 4, 6, 8]]
+
+    \end{Verbatim}
+
+    \subsection{Question 4}\label{question-4}
+
+    Write a program that accepts a sequence of whitespace separated words as
+input and prints the words after removing all duplicate words and
+sorting them alphanumerically.
+
+Suppose the following input is supplied to the program:
+
+hello world and practice makes perfect and hello world again
+
+Then, the output should be:
+
+again and hello makes perfect practice world
+
+\paragraph{Hints:}\label{hints}
+
+We use set container to remove duplicated data automatically and then
+use sorted() to sort the data.
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{sequencial\PYZus{}sentence} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter a sentence seperated by whitespaces : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                 \PY{c+c1}{\PYZsh{} input sequence of words }
+         \PY{n}{sequencial\PYZus{}sentence\PYZus{}spilt} \PY{o}{=} \PY{n}{sequencial\PYZus{}sentence}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}                                  \PY{c+c1}{\PYZsh{} split the words based on whitespaces }
+         \PY{n}{seq\PYZus{}set} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{sequencial\PYZus{}sentence\PYZus{}spilt}\PY{p}{)}                                                    \PY{c+c1}{\PYZsh{} arrange them alphanumerically}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{The output after removing duplicate words and sorting them alphanumerically is : }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n}{seq\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{)}    \PY{c+c1}{\PYZsh{} display the arranged sentence}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter a sentence seperated by whitespaces : hello world and practice makes perfect and hello world again
+
+The output after removing duplicate words and sorting them alphanumerically is : 
+ again and hello makes perfect practice world
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{seq} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter a sentence seperated by whitespaces : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    \PY{c+c1}{\PYZsh{} input sequence of words           }
+         \PY{n}{words} \PY{o}{=} \PY{p}{[}\PY{n}{word} \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{seq}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}                      \PY{c+c1}{\PYZsh{} split the words based on whitespaces }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{The output after removing duplicate words and sorting them alphanumerically is : }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}     \PY{c+c1}{\PYZsh{} arrange them alphanumerically and display the output }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter a sentence seperated by whitespaces : hello world and practice makes perfect and hello world again
+
+The output after removing duplicate words and sorting them alphanumerically is : 
+ again and hello makes perfect practice world
+
+    \end{Verbatim}
+
+    \subsection{Question 5}\label{question-5}
+
+    Write a program which accepts a sequence of comma separated 4 digit
+binary numbers as its input and then check whether they are divisible by
+5 or not. The numbers that are divisible by 5 are to be printed in a
+comma separated sequence.
+
+\paragraph{Example:}\label{example}
+
+0100,0011,1010,1001
+
+Then the output should be:
+
+1010
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{bi\PYZus{}num} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{input}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}                       \PY{c+c1}{\PYZsh{} input sequence and split at \PYZsq{},\PYZsq{}}
+        \PY{n}{out\PYZus{}seq} \PY{o}{=} \PY{p}{[}\PY{p}{]}                                                   \PY{c+c1}{\PYZsh{} create empty array  }
+        
+        \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{bi\PYZus{}num}\PY{p}{:}                                               \PY{c+c1}{\PYZsh{} iterate through total number of input}
+            \PY{n}{i} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} 
+            \PY{k}{if} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{5} == 0:                                               \PYZsh{} check if divisible by 5  
+                \PY{n}{out\PYZus{}seq}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{j}\PY{p}{)}                                      \PY{c+c1}{\PYZsh{} append if divisible by 5  }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{out\PYZus{}seq}\PY{p}{)}\PY{p}{)}                                       \PY{c+c1}{\PYZsh{} join the numbers and display}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0100,0011,1010,1001
+1010
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{out\PYZus{}value} \PY{o}{=} \PY{p}{[}\PY{p}{]}                                                  \PY{c+c1}{\PYZsh{} create empty array}
+         \PY{n}{items}\PY{o}{=}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{input}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}                           \PY{c+c1}{\PYZsh{} input sequence and split at \PYZsq{},\PYZsq{}}
+         
+         \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{items}\PY{p}{:}                                                 \PY{c+c1}{\PYZsh{} iterate through total number of input}
+             \PY{n}{i} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{5}:                                                 \PYZsh{} check if divisible by 5
+                 \PY{n}{out\PYZus{}value}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{j}\PY{p}{)}                                     \PY{c+c1}{\PYZsh{} append if divisible by 5}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{out\PYZus{}value}\PY{p}{)}\PY{p}{)}                                      \PY{c+c1}{\PYZsh{} join the numbers and display }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0100,0011,1010,1001
+1010
+
+    \end{Verbatim}
+
+    \subsection{Question 6}\label{question-6}
+
+    Write a program, which will find all such numbers between 1000 and 3000
+(both included) such that each digit of the number is an even number.
+
+The numbers obtained should be printed in a comma-separated sequence on
+a single line.
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k}{def} \PY{n+nf}{even}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}                                             \PY{c+c1}{\PYZsh{} define function even accepting start and end number }
+             
+             \PY{n}{sequence} \PY{o}{=} \PY{p}{[}\PY{p}{]}                                          \PY{c+c1}{\PYZsh{} create empty array  }
+             
+             \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}                                 \PY{c+c1}{\PYZsh{} iterate through the total number }
+                 \PY{n}{is\PYZus{}even} \PY{o}{=} \PY{k+kc}{True}                                     \PY{c+c1}{\PYZsh{} default as true}
+                 \PY{n}{total} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num}\PY{p}{)}                                   \PY{c+c1}{\PYZsh{} make the total number as str}
+                 
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{total}\PY{p}{:}                                    \PY{c+c1}{\PYZsh{} iterate through total number}
+                     \PY{k}{if} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}                            \PY{c+c1}{\PYZsh{} check if every digit is divisible by 2 }
+                         \PY{n}{is\PYZus{}even} \PY{o}{=} \PY{k+kc}{False}
+                 \PY{k}{if} \PY{n}{is\PYZus{}even} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                     \PY{n}{sequence}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{)}                      \PY{c+c1}{\PYZsh{} append if every number is divisible by 2}
+             \PY{k}{return}\PY{p}{(}\PY{n}{sequence}\PY{p}{)}                                       \PY{c+c1}{\PYZsh{} return the array }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the sequence is : }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{even}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{3001}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}     \PY{c+c1}{\PYZsh{} display array after passing through function}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the sequence is : 
+
+ 2000,2002,2004,2006,2008,2020,2022,2024,2026,2028,2040,2042,2044,2046,2048,2060,2062,2064,2066,2068,2080,2082,2084,2086,2088,2200,2202,2204,2206,2208,2220,2222,2224,2226,2228,2240,2242,2244,2246,2248,2260,2262,2264,2266,2268,2280,2282,2284,2286,2288,2400,2402,2404,2406,2408,2420,2422,2424,2426,2428,2440,2442,2444,2446,2448,2460,2462,2464,2466,2468,2480,2482,2484,2486,2488,2600,2602,2604,2606,2608,2620,2622,2624,2626,2628,2640,2642,2644,2646,2648,2660,2662,2664,2666,2668,2680,2682,2684,2686,2688,2800,2802,2804,2806,2808,2820,2822,2824,2826,2828,2840,2842,2844,2846,2848,2860,2862,2864,2866,2868,2880,2882,2884,2886,2888 
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{seq} \PY{o}{=} \PY{p}{[}\PY{p}{]}                                                     \PY{c+c1}{\PYZsh{} create empty array }
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{3001}\PY{p}{)}\PY{p}{:}                                  \PY{c+c1}{\PYZsh{} iterate through the total number}
+             \PY{n}{ev} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{ev}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{2}==0) and (int(ev[1])\PYZpc{}2==0) and (int(ev[2])\PYZpc{}2==0) and (int(ev[3])\PYZpc{}2==0):          \PYZsh{} check if every digit is divisible by 2
+                 \PY{n}{seq}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ev}\PY{p}{)}                                       \PY{c+c1}{\PYZsh{} append if every number is divisible by 2 }
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the sequence is : }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{seq}\PY{p}{)}\PY{p}{)}               \PY{c+c1}{\PYZsh{} return the array  }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the sequence is : 
+
+  2000,2002,2004,2006,2008,2020,2022,2024,2026,2028,2040,2042,2044,2046,2048,2060,2062,2064,2066,2068,2080,2082,2084,2086,2088,2200,2202,2204,2206,2208,2220,2222,2224,2226,2228,2240,2242,2244,2246,2248,2260,2262,2264,2266,2268,2280,2282,2284,2286,2288,2400,2402,2404,2406,2408,2420,2422,2424,2426,2428,2440,2442,2444,2446,2448,2460,2462,2464,2466,2468,2480,2482,2484,2486,2488,2600,2602,2604,2606,2608,2620,2622,2624,2626,2628,2640,2642,2644,2646,2648,2660,2662,2664,2666,2668,2680,2682,2684,2686,2688,2800,2802,2804,2806,2808,2820,2822,2824,2826,2828,2840,2842,2844,2846,2848,2860,2862,2864,2866,2868,2880,2882,2884,2886,2888
+
+    \end{Verbatim}
+
+    \subsection{Question 7}\label{question-7}
+
+    Write a program that accepts a sentence and calculate the number of
+letters and digits.
+
+Suppose the following input is supplied to the program:
+
+hello world! 123
+
+Then, the output should be:
+
+LETTERS 10
+
+DIGITS 3
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{string\PYZus{}in} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Input a string : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                          \PY{c+c1}{\PYZsh{} input sentence}
+        
+        \PY{n}{digit} \PY{o}{=} \PY{l+m+mi}{0}                                                        \PY{c+c1}{\PYZsh{} assign digit variable to 0}
+        \PY{n}{letter} \PY{o}{=} \PY{l+m+mi}{0}                                                       \PY{c+c1}{\PYZsh{} assign letter variable to 0}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{string\PYZus{}in}\PY{p}{:}                                              \PY{c+c1}{\PYZsh{} iterate total numeber of charecters }
+            \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{isalpha}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                              \PY{c+c1}{\PYZsh{} check if charecter is an alphabet}
+                \PY{n}{letter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}                                              \PY{c+c1}{\PYZsh{} increase letter count by 1}
+            \PY{k}{elif} \PY{n}{i}\PY{o}{.}\PY{n}{isdigit}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                            \PY{c+c1}{\PYZsh{} check if charecter is an digit}
+                \PY{n}{digit} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}                                               \PY{c+c1}{\PYZsh{} increase digit count by 1 }
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{pass}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of letters are : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{letter}\PY{p}{)}\PY{p}{)}           \PY{c+c1}{\PYZsh{} display total number of letter}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of digits are  : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{digit}\PY{p}{)}\PY{p}{)}            \PY{c+c1}{\PYZsh{} display taoal number of digit}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Input a string : hello world! 123
+The number of letters are : 10
+The number of digits are  : 3
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{string\PYZus{}in} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Input a string : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                          \PY{c+c1}{\PYZsh{} input sentence}
+         
+         \PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DIGITS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LETTERS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}                                    \PY{c+c1}{\PYZsh{} assign digit and letter variable to 0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{string\PYZus{}in}\PY{p}{:}                                              \PY{c+c1}{\PYZsh{} iterate total numeber of charecters  }
+             \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{isdigit}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                              \PY{c+c1}{\PYZsh{} check if charecter is an digit}
+                 \PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DIGITS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}                                           \PY{c+c1}{\PYZsh{} increase digit count by 1  }
+             \PY{k}{elif} \PY{n}{i}\PY{o}{.}\PY{n}{isalpha}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                            \PY{c+c1}{\PYZsh{} check if charecter is an alphabet}
+                 \PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LETTERS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}                                          \PY{c+c1}{\PYZsh{} increase letter count by 1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{pass}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LETTERS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LETTERS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}                                   \PY{c+c1}{\PYZsh{} display total number of letter}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DIGITS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DIGITS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}                                     \PY{c+c1}{\PYZsh{} display taoal number of digit}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Input a string : hello world! 123
+LETTERS 10
+DIGITS 3
+
+    \end{Verbatim}
+
+    \subsection{Question 8}\label{question-8}
+
+    Write a program that computes the value of a+aa+aaa+aaaa with a given
+digit as the value of a.
+
+Suppose the following input is supplied to the program:
+
+9
+
+Then, the output should be:
+
+11106
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{number} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter the digit : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} input digit}
+         
+         \PY{n}{p1} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{number} \PY{p}{)}                                        
+         \PY{n}{p2} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{number}\PY{p}{,}\PY{n}{number}\PY{p}{)} \PY{p}{)}
+         \PY{n}{p3} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{number}\PY{p}{,}\PY{n}{number}\PY{p}{,}\PY{n}{number}\PY{p}{)} \PY{p}{)}
+         \PY{n}{p4} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{number}\PY{p}{,}\PY{n}{number}\PY{p}{,}\PY{n}{number}\PY{p}{,}\PY{n}{number}\PY{p}{)} \PY{p}{)}
+         
+         \PY{n}{sum\PYZus{}of\PYZus{}all} \PY{o}{=} \PY{n}{p1} \PY{o}{+} \PY{n}{p2} \PY{o}{+} \PY{n}{p3} \PY{o}{+} \PY{n}{p4}                                   \PY{c+c1}{\PYZsh{} add all value }
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the sum value of digti is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sum\PYZus{}of\PYZus{}all}\PY{p}{)}\PY{p}{)}      \PY{c+c1}{\PYZsh{} display result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter the digit : 9
+the sum value of digti is : 11106 
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{number} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter number :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                                 \PY{c+c1}{\PYZsh{} input digit}
+         \PY{n}{DIGIT} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{n}{res} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{DIGIT}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}                                       \PY{c+c1}{\PYZsh{} add all value}
+             \PY{n}{res} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{o}{*}\PY{n}{i}\PY{p}{)}                                    \PY{c+c1}{\PYZsh{} mult and add }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the sum value of digti is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{res}\PY{p}{)}\PY{p}{)}             \PY{c+c1}{\PYZsh{} display result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter number :9
+the sum value of digti is : 11106 
+
+    \end{Verbatim}
+
+    \subsection{Question 9}\label{question-9}
+
+    Write a program that computes the net amount of a bank account based a
+transaction log from console input. The transaction log format is shown
+as following:
+
+D 100
+
+W 200
+
+...
+
+D means deposit while W means withdrawal.
+
+Suppose the following input is supplied to the program:
+
+D 300
+
+D 300
+
+W 200
+
+D 100
+
+Then, the output should be:
+
+500
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{net\PYZus{}transaction} \PY{o}{=} \PY{l+m+mi}{0}                                                \PY{c+c1}{\PYZsh{} set initial amount to 0}
+         
+         \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}                                                        \PY{c+c1}{\PYZsh{} keep checking for input }
+             \PY{n}{input\PYZus{}trans} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZgt{} }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}                            \PY{c+c1}{\PYZsh{} input value and split      }
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{input\PYZus{}trans}\PY{p}{:}
+                 \PY{k}{break}\PY{p}{;}                                                     \PY{c+c1}{\PYZsh{} break if there is no input}
+         
+             \PY{n}{net\PYZus{}amount} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{input\PYZus{}trans}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}                               
+             \PY{k}{if} \PY{n}{input\PYZus{}trans}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}                                      \PY{c+c1}{\PYZsh{} check if the initial char starts with D for Deposit}
+                 \PY{n}{net\PYZus{}transaction} \PY{o}{+}\PY{o}{=} \PY{n}{net\PYZus{}amount}                              \PY{c+c1}{\PYZsh{} add it to the net amount}
+             \PY{k}{elif} \PY{n}{input\PYZus{}trans}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}                                    \PY{c+c1}{\PYZsh{} check if the initial char starts with W for Withdrawal}
+                 \PY{n}{net\PYZus{}transaction} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{net\PYZus{}amount}                              \PY{c+c1}{\PYZsh{} deduct it from the net amount }
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The net amount is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{net\PYZus{}transaction}\PY{p}{)}\PY{p}{)}           \PY{c+c1}{\PYZsh{} display the remaining amount}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--> D 300
+--> D 300
+--> W 200
+--> D 100
+--> 
+The net amount is : 500 
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{net\PYZus{}amount} \PY{o}{=} \PY{l+m+mi}{0}                                                      \PY{c+c1}{\PYZsh{} set initial amount to 0  }
+         
+         \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}                                                         \PY{c+c1}{\PYZsh{} keep checking for input}
+             \PY{n}{s} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZgt{} }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                                               \PY{c+c1}{\PYZsh{} input value and split}
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{s}\PY{p}{:}
+                 \PY{k}{break}                                                       \PY{c+c1}{\PYZsh{} break if there is no input}
+             \PY{n}{values} \PY{o}{=} \PY{n}{s}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                                            
+             \PY{n}{operation} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{amount} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{n}{operation}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}                                              \PY{c+c1}{\PYZsh{} check if the initial char starts with D for Deposit}
+                 \PY{n}{net\PYZus{}amount}\PY{o}{+}\PY{o}{=}\PY{n}{amount}                                          \PY{c+c1}{\PYZsh{} add it to the net amount}
+             \PY{k}{elif} \PY{n}{operation}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}                                            \PY{c+c1}{\PYZsh{} check if the initial char starts with W for Withdrawal}
+                 \PY{n}{net\PYZus{}amount}\PY{o}{\PYZhy{}}\PY{o}{=}\PY{n}{amount}                                          \PY{c+c1}{\PYZsh{} deduct it from the net amount          }
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{pass}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The net amount is : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{net\PYZus{}amount}\PY{p}{)}\PY{p}{)}                 \PY{c+c1}{\PYZsh{} display the remaining amount }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--> D 300
+--> D 300
+--> W 200
+--> D 100
+--> 
+The net amount is : 500 
+
+    \end{Verbatim}
+
+    \subsection{Question 10}\label{question-10}
+
+    Write a program to compute:
+
+f(n)=f(n-1)+100 when n\textgreater{}0
+
+and f(0)=1
+
+with a given n input by console (n\textgreater{}0).
+
+    \subsubsection{version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}                                                         \PY{c+c1}{\PYZsh{} define function to accept a digit}
+            \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{1}                                                  \PY{c+c1}{\PYZsh{} return 1 if number = 0 }
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{f}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{100}                                         \PY{c+c1}{\PYZsh{} perform recursive function and return value}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{input\PYZus{}n} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter number : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}                           \PY{c+c1}{\PYZsh{} input digit/value}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f(}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{) = }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{(}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{)}\PY{p}{)}               \PY{c+c1}{\PYZsh{} display the computed value}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter number : 3
+f(3) = 301
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k}{def} \PY{n+nf}{f2}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ans} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{f2}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{100}
+         
+         
+         \PY{n}{input\PYZus{}n} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter number : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f(}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{) = }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{(}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{,} \PY{n}{f2}\PY{p}{(}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter number : 3
+f(3) = 301
+
+    \end{Verbatim}
+
+    \subsection{Question 11}\label{question-11}
+
+    Segment the following short text into sentences and words:
+
+s = u"""DTU course 02820 is taught by Mr. Bartlomiej Wilkowski, Mr.
+Marcin Marek Szewczyk \& Finn Arup Nielsen, Ph.D. Some of aspects of the
+course are: machine learning and web 2.0. The telephone to Finn is (+45)
+4525 3921, and his email is fn@imm.dtu.dk. A book published by O'Reilly
+called 'Programming Collective Intelligence' might be useful. It costs
+\$39.99 or 285.00 kroner in Polyteknisk Boghandle. Is 'Text Processing
+in Python' appropriate for the course? Perhaps! The constructor function
+in Python is called "\textbf{init}()". fMRI will not be a topic of the
+course."""
+
+Try both with the re module as well as with a function from nltk.
+
+    \subsubsection{Version 1}\label{version-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}                                                         \PY{c+c1}{\PYZsh{} import nltk library}
+         
+         \PY{n}{text} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter the sentence : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                               \PY{c+c1}{\PYZsh{} input the sentence }
+         
+         \PY{n}{sent\PYZus{}text} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{sent\PYZus{}tokenize}\PY{p}{(}\PY{n}{text}\PY{p}{)}                                \PY{c+c1}{\PYZsh{} this gives us a list of sentences}
+         
+         \PY{k}{for} \PY{n}{sentence} \PY{o+ow}{in} \PY{n}{sent\PYZus{}text}\PY{p}{:}                                          \PY{c+c1}{\PYZsh{} now loop over each sentence and tokenize it separately}
+             \PY{n}{tokenized\PYZus{}text} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}
+             \PY{n}{tagged} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{pos\PYZus{}tag}\PY{p}{(}\PY{n}{tokenized\PYZus{}text}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{tagged}\PY{p}{)}                                                   \PY{c+c1}{\PYZsh{} print the parsed sentence}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter the sentence : u"""DTU course 02820 is taught by Mr. Bartlomiej Wilkowski, Mr. Marcin Marek Szewczyk \& Finn Arup Nielsen, Ph.D. Some of aspects of the course are: machine learning and web 2.0. The telephone to Finn is (+45) 4525 3921, and his email is fn@imm.dtu.dk. A book published by O’Reilly called ’Programming Collective Intelligence’ might be useful. It costs \$39.99 or 285.00 kroner in Polyteknisk Boghandle. Is ’Text Processing in Python’ appropriate for the course? Perhaps! The constructor function in Python is called "\_\_init\_\_()". fMRI will not be a topic of the course."""
+[('u', 'NN'), ("''", "''"), ("''", "''"), ("''", "''"), ('DTU', 'NNP'), ('course', 'NN'), ('02820', 'CD'), ('is', 'VBZ'), ('taught', 'VBN'), ('by', 'IN'), ('Mr.', 'NNP'), ('Bartlomiej', 'NNP'), ('Wilkowski', 'NNP'), (',', ','), ('Mr.', 'NNP'), ('Marcin', 'NNP'), ('Marek', 'NNP'), ('Szewczyk', 'NNP'), ('\&', 'CC'), ('Finn', 'NNP'), ('Arup', 'NNP'), ('Nielsen', 'NNP'), (',', ','), ('Ph.D', 'NNP'), ('.', '.')]
+[('Some', 'DT'), ('of', 'IN'), ('aspects', 'NNS'), ('of', 'IN'), ('the', 'DT'), ('course', 'NN'), ('are', 'VBP'), (':', ':'), ('machine', 'NN'), ('learning', 'NN'), ('and', 'CC'), ('web', '\$'), ('2.0', 'CD'), ('.', '.')]
+[('The', 'DT'), ('telephone', 'NN'), ('to', 'TO'), ('Finn', 'NNP'), ('is', 'VBZ'), ('(', '('), ('+45', 'NN'), (')', ')'), ('4525', 'CD'), ('3921', 'CD'), (',', ','), ('and', 'CC'), ('his', 'PRP\$'), ('email', 'NN'), ('is', 'VBZ'), ('fn', 'JJ'), ('@', 'NNP'), ('imm.dtu.dk', 'NN'), ('.', '.')]
+[('A', 'DT'), ('book', 'NN'), ('published', 'VBN'), ('by', 'IN'), ('O', 'NNP'), ('’', 'NNP'), ('Reilly', 'NNP'), ('called', 'VBD'), ('’', 'RP'), ('Programming', 'NNP'), ('Collective', 'NNP'), ('Intelligence', 'NNP'), ('’', 'NNP'), ('might', 'MD'), ('be', 'VB'), ('useful', 'JJ'), ('.', '.')]
+[('It', 'PRP'), ('costs', 'VBZ'), ('\$', '\$'), ('39.99', 'CD'), ('or', 'CC'), ('285.00', 'CD'), ('kroner', 'NN'), ('in', 'IN'), ('Polyteknisk', 'NNP'), ('Boghandle', 'NNP'), ('.', '.')]
+[('Is', 'VBZ'), ('’', 'JJ'), ('Text', 'NNP'), ('Processing', 'NNP'), ('in', 'IN'), ('Python', 'NNP'), ('’', 'NNP'), ('appropriate', 'NN'), ('for', 'IN'), ('the', 'DT'), ('course', 'NN'), ('?', '.')]
+[('Perhaps', 'RB'), ('!', '.')]
+[('The', 'DT'), ('constructor', 'NN'), ('function', 'NN'), ('in', 'IN'), ('Python', 'NNP'), ('is', 'VBZ'), ('called', 'VBN'), ('``', '``'), ('\_\_init\_\_', 'NNP'), ('(', '('), (')', ')'), ("''", "''"), ('.', '.')]
+[('fMRI', 'NN'), ('will', 'MD'), ('not', 'RB'), ('be', 'VB'), ('a', 'DT'), ('topic', 'NN'), ('of', 'IN'), ('the', 'DT'), ('course', 'NN'), ('.', '.'), ("''", "''"), ("''", "''"), ("''", "''")]
+
+    \end{Verbatim}
+
+    \subsubsection{Version 2}\label{version-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{import} \PY{n+nn}{re}                                                             \PY{c+c1}{\PYZsh{} import re library}
+         
+         \PY{n}{sentence} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter the sentence : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} input the sentence }
+         \PY{n}{sentences} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(?\PYZlt{}!}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w.)(?\PYZlt{}![A\PYZhy{}Z][a\PYZhy{}z][0\PYZhy{}9]}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{.)(?\PYZlt{}=}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{.|}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{?)}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sentence}\PY{p}{)}    \PY{c+c1}{\PYZsh{} split sentence using all charecter maekers and breakers}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the parsed sentence is : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                                    \PY{c+c1}{\PYZsh{} iterate through all words and print the parsed sentence  }
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{sentences}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter the sentence : u"""DTU course 02820 is taught by Mr. Bartlomiej Wilkowski, Mr. Marcin Marek Szewczyk \& Finn Arup Nielsen, Ph.D. Some of aspects of the course are: machine learning and web 2.0. The telephone to Finn is (+45) 4525 3921, and his email is fn@imm.dtu.dk. A book published by O’Reilly called ’Programming Collective Intelligence’ might be useful. It costs \$39.99 or 285.00 kroner in Polyteknisk Boghandle. Is ’Text Processing in Python’ appropriate for the course? Perhaps! The constructor function in Python is called "\_\_init\_\_()". fMRI will not be a topic of the course."""
+the parsed sentence is : 
+u"""DTU course 02820 is taught by Mr.
+Bartlomiej Wilkowski, Mr.
+Marcin Marek Szewczyk \& Finn Arup Nielsen, Ph.D. Some of aspects of the course are: machine learning and web 2.0. The telephone to Finn is (+45) 4525 3921, and his email is fn@imm.dtu.dk.
+A book published by O’Reilly called ’Programming Collective Intelligence’ might be useful.
+It costs \$39.99 or 285.00 kroner in Polyteknisk Boghandle.
+Is ’Text Processing in Python’ appropriate for the course?
+Perhaps! The constructor function in Python is called "\_\_init\_\_()".
+fMRI will not be a topic of the course."""
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} from nltk.tokenize import TweetTokenizer, sent\PYZus{}tokenize}
+         
+         \PY{c+c1}{\PYZsh{} input\PYZus{}text = input()}
+         
+         \PY{c+c1}{\PYZsh{} tokenizer\PYZus{}words = TweetTokenizer()}
+         \PY{c+c1}{\PYZsh{} tokens\PYZus{}sentences = [tokenizer\PYZus{}words.tokenize(t) for t in nltk.sent\PYZus{}tokenize(input\PYZus{}text)]}
+         \PY{c+c1}{\PYZsh{} print(tokens\PYZus{}sentences)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+this is a sentaence. it, now deleted by 0
+[['this', 'is', 'a', 'sentaence', '.'], ['it', ',', 'now', 'deleted', 'by', '0']]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} from nltk.tokenize import sent\PYZus{}tokenize}
+        
+        \PY{c+c1}{\PYZsh{} string = \PYZdq{}this is a sentaence. it, now deleted by 0\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{} sent\PYZus{}tokenize\PYZus{}list = sent\PYZus{}tokenize(string)}
+        \PY{c+c1}{\PYZsh{} print(sent\PYZus{}tokenize\PYZus{}list)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['this is a sentaence.', 'it, now deleted by 0']
+
+    \end{Verbatim}
+
+    \subsection{Question 12 - 16*}\label{question-12---16}
+
+    Project Euler is a website with mathematical problems that should/could
+be solved by computers. Go to https://projecteuler.net/archives and
+solve any 4 problems using Python.
+
+As an example the problem number 16 can be solved in one line of Python:
+
+sum(map(int, list(str(2**1000))))
+
+1366
+
+    \subsubsection{Problem 1}\label{problem-1}
+
+If we list all the natural numbers below 10 that are multiples of 3 or
+5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+Find the sum of all the multiples of 3 or 5 below 1000.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{naturalNumbersMult}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                       \PY{c+c1}{\PYZsh{} define function}
+             \PY{n}{sum1} \PY{o}{=} \PY{l+m+mi}{0}                                                    \PY{c+c1}{\PYZsh{} set variable to 0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}                                     \PY{c+c1}{\PYZsh{} iteate from pre defined numbers}
+                 \PY{k}{if} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{3} == 0 or i\PYZpc{}5 == 0:                                \PYZsh{} check if divisible by 3 or 5
+                     \PY{n}{sum1} \PY{o}{+}\PY{o}{=} \PY{n}{i}                                           \PY{c+c1}{\PYZsh{} if it is then add it to sum}
+             \PY{k}{return} \PY{n}{sum1}                                                 \PY{c+c1}{\PYZsh{} return the result }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{naturalNumbersMult}\PY{p}{(}\PY{p}{)}\PY{p}{)}                                     \PY{c+c1}{\PYZsh{} display result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+233168
+
+    \end{Verbatim}
+
+    \subsubsection{Problem 2}\label{problem-2}
+
+    Each new term in the Fibonacci sequence is generated by adding the
+previous two terms. By starting with 1 and 2, the first 10 terms will
+be:
+
+1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+
+By considering the terms in the Fibonacci sequence whose values do not
+exceed four million, find the sum of the even-valued terms.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{evenFib}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                                  \PY{c+c1}{\PYZsh{} define function                   }
+             \PY{n}{fib\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}                                            \PY{c+c1}{\PYZsh{} define array }
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{sum1} \PY{o}{=} \PY{l+m+mi}{2}
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}                                                 \PY{c+c1}{\PYZsh{} run forever till stopped }
+                 \PY{n}{fib\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fib\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{fib\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{fib\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4000000}\PY{p}{:}                             \PY{c+c1}{\PYZsh{} check condition }
+                     \PY{k}{break}                                               \PY{c+c1}{\PYZsh{} break loop}
+                 \PY{k}{if} \PY{n}{fib\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZpc{}}\PY{k}{2} == 0:                                \PYZsh{} check if digit divisible by 0
+                     \PY{n}{sum1} \PY{o}{+}\PY{o}{=} \PY{n}{fib\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}                               \PY{c+c1}{\PYZsh{} add to sum if divisible}
+                 \PY{n}{i} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}                                                    
+             \PY{k}{return} \PY{p}{(}\PY{n}{fib\PYZus{}list}\PY{p}{,} \PY{n}{sum1}\PY{p}{)}                                     \PY{c+c1}{\PYZsh{} return result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the terms of the fib list are : }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{evenFib}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}     \PY{c+c1}{\PYZsh{} display all the terms }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{the sum of even valued terms : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{evenFib}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}        \PY{c+c1}{\PYZsh{} display the total result }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the terms of the fib list are : 
+ [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887] 
+
+the sum of even valued terms : 4613732
+
+    \end{Verbatim}
+
+    \subsubsection{Problem 3}\label{problem-3}
+
+    The prime factors of 13195 are 5, 7, 13 and 29.
+
+What is the largest prime factor of the number 600851475143 ?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{math}                                                       \PY{c+c1}{\PYZsh{} import library}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{isPrimeNumber}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}                                             \PY{c+c1}{\PYZsh{} define function and check conditoins}
+            \PY{k}{if} \PY{n}{n} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{False}
+            \PY{k}{elif} \PY{n}{n} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{3}\PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{True}
+            \PY{k}{elif} \PY{n}{n} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{n} \PY{o}{\PYZpc{}} \PY{l+m+mi}{3} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{False}
+            \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{5}
+            \PY{k}{while} \PY{n}{i}\PY{o}{*}\PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{n}\PY{p}{:}
+                \PY{k}{if} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{i}==0 or n\PYZpc{}(i+2)==0:                     
+                    \PY{k}{return} \PY{k+kc}{False}
+                \PY{n}{i} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{6}
+            \PY{k}{return} \PY{k+kc}{True}                                                   \PY{c+c1}{\PYZsh{} return respective conditon}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{largestPrimeFactor}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}                                        \PY{c+c1}{\PYZsh{} define function}
+            \PY{n}{largest\PYZus{}prime} \PY{o}{=} \PY{l+m+mi}{0}                                             \PY{c+c1}{\PYZsh{} set varibale to 0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}                        \PY{c+c1}{\PYZsh{} iterate the provided number(sqrt)}
+                \PY{k}{if} \PY{n}{isPrimeNumber}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o+ow}{and} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{i}==0:                           \PYZsh{} check if the number is prime using defined function
+                    \PY{n}{largest\PYZus{}prime} \PY{o}{=} \PY{n}{i}
+            \PY{k}{return} \PY{n}{largest\PYZus{}prime}                                          \PY{c+c1}{\PYZsh{} return result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{largestPrimeFactor}\PY{p}{(}\PY{l+m+mi}{600851475143}\PY{p}{)}\PY{p}{)}                           \PY{c+c1}{\PYZsh{} display result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6857
+
+    \end{Verbatim}
+
+    \subsubsection{Problem 4}\label{problem-4}
+
+    A palindromic number reads the same both ways. The largest palindrome
+made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+Find the largest palindrome made from the product of two 3-digit
+numbers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{def} \PY{n+nf}{isPalindrome}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}                                               \PY{c+c1}{\PYZsh{} define function   }
+             \PY{k}{if} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{==}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}                                       \PY{c+c1}{\PYZsh{} check if string is a palandrome}
+                 \PY{k}{return} \PY{k+kc}{True}                                                \PY{c+c1}{\PYZsh{} return true is palandrome  }
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k}{def} \PY{n+nf}{largestProductPalindrome}\PY{p}{(}\PY{p}{)}\PY{p}{:}                                    \PY{c+c1}{\PYZsh{} define function }
+             \PY{n}{max\PYZus{}product} \PY{o}{=} \PY{l+m+mi}{0}                                                \PY{c+c1}{\PYZsh{} set variable to 0 }
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}                                      \PY{c+c1}{\PYZsh{} iterate through provided range}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{product} \PY{o}{=} \PY{n}{i} \PY{o}{*} \PY{n}{j}
+                     \PY{k}{if} \PY{n}{product} \PY{o}{\PYZgt{}} \PY{n}{max\PYZus{}product} \PY{o+ow}{and} \PY{n}{isPalindrome}\PY{p}{(}\PY{n}{product}\PY{p}{)}\PY{p}{:}    \PY{c+c1}{\PYZsh{} check if palandrome using defined function  }
+                         \PY{n}{max\PYZus{}product} \PY{o}{=} \PY{n}{product}                              \PY{c+c1}{\PYZsh{} update if value is greater }
+             \PY{k}{return} \PY{n}{max\PYZus{}product}                                             \PY{c+c1}{\PYZsh{} return result }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{largestProductPalindrome}\PY{p}{(}\PY{p}{)}\PY{p}{)}                                  \PY{c+c1}{\PYZsh{} display result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+906609
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
